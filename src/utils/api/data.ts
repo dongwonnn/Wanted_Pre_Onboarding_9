@@ -1,12 +1,12 @@
 import client from "./client";
 import { ITodo } from "utils/types/ITodo";
 
-export const getTodosData = () => client.get("/");
+export const getTodosData = () => client.get("/todos");
 
 export const createTodoData = ({ content, isCheck, createAt }: ITodo) =>
-  client.post("/", { content, isCheck, createAt });
+  client.post("/todos", { content, isCheck, createAt });
 
-export const deleteTodoData = (id: number) => client.delete(`/${id}`);
+export const deleteTodoData = (id: number) => client.delete(`/todos/${id}`);
 
-export const updateCheckTodoData = ({ id, isCheck }: ITodo) =>
-  client.patch(`/${id}`, { isCheck });
+export const completeCheckTodoData = ({ id, isCheck }: ITodo) =>
+  client.patch(`/todos/${id}`, { isCheck });

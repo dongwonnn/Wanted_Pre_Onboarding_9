@@ -6,9 +6,9 @@ import {
   DELETE_TODO_REQUEST,
   DELETE_TODO_SUCCESS,
   DELETE_TODO_FAILURE,
-  UPDATE_TODO_REQUEST,
-  UPDATE_TODO_SUCCESS,
-  UPDATE_TODO_FAILURE,
+  COMPLETE_TODO_REQUEST,
+  COMPLETE_TODO_SUCCESS,
+  COMPLETE_TODO_FAILURE,
   READ_TODO_REQUEST,
   READ_TODO_SUCCESS,
   READ_TODO_FAILURE,
@@ -21,10 +21,11 @@ export const initialState = {
   createError: false,
   readLoading: false,
   readError: false,
-  updateLoading: false,
-  updateError: false,
+  completeLoading: false,
+  completeError: false,
   deleteLoading: false,
   deleteError: false,
+  count: null,
 };
 
 type TodoState = {
@@ -33,10 +34,11 @@ type TodoState = {
   createError: boolean;
   readLoading: boolean;
   readError: boolean;
-  updateLoading: boolean;
-  updateError: boolean;
+  completeLoading: boolean;
+  completeError: boolean;
   deleteLoading: boolean;
   deleteError: boolean;
+  count: number | null;
 };
 
 const todo = (
@@ -82,13 +84,13 @@ const todo = (
         deleteLoading: false,
         deleteError: true,
       };
-    case UPDATE_TODO_REQUEST:
+    case COMPLETE_TODO_REQUEST:
       return {
         ...state,
-        updateLoading: true,
-        updateError: false,
+        completeLoading: true,
+        completeError: false,
       };
-    case UPDATE_TODO_SUCCESS:
+    case COMPLETE_TODO_SUCCESS:
       return {
         ...state,
         todos: state.todos.map((todo) =>
@@ -96,14 +98,14 @@ const todo = (
             ? { ...todo, isCheck: !todo.isCheck }
             : todo
         ),
-        updateLoading: false,
-        updateError: false,
+        completeLoading: false,
+        completeError: false,
       };
-    case UPDATE_TODO_FAILURE:
+    case COMPLETE_TODO_FAILURE:
       return {
         ...state,
-        updateLoading: false,
-        updateError: true,
+        completeLoading: false,
+        completeError: true,
       };
     case READ_TODO_REQUEST:
       return {

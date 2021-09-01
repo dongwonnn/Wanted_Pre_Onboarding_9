@@ -5,9 +5,9 @@ import {
   MdCheckBox,
   MdRemoveCircleOutline,
 } from "react-icons/md";
-import { deleteTodoRequest, updateTodoRequest } from "store/actions/todo";
+import { deleteTodoRequest, completeTodoRequest } from "store/actions/todo";
 import { RootState } from "store/reducers";
-import { UPDATE_ERROR_MESSAGE, REMOVE_ERROE_MESSAGE } from "utils/constants";
+import { COMPLETE_ERROR_MESSAGE, REMOVE_ERROE_MESSAGE } from "utils/constants";
 import { CenterErrorMessage } from "utils/styles/Message";
 import { ITodo } from "utils/types/ITodo";
 import Spinner from "components/Common/Spinner";
@@ -20,7 +20,7 @@ interface TodoListItemProps {
 const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
   const { id, content, isCheck, createAt } = todo;
   const dispatch = useDispatch();
-  const { updateLoading, updateError, deleteLoading, deleteError } =
+  const { completeLoading, completeError, deleteLoading, deleteError } =
     useSelector((state: RootState) => state.todo);
 
   const onRemove = useCallback(
@@ -33,7 +33,7 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
   const onToggleComplete = useCallback(
     (id) => {
       dispatch(
-        updateTodoRequest({
+        completeTodoRequest({
           id,
           isCheck: !isCheck,
         })
@@ -45,19 +45,21 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
   return (
     <TodoListItemWrapper>
       <TodoCheckBox isCheck={isCheck} onClick={() => onToggleComplete(id)}>
-        {updateLoading ? (
+        {completeLoading ? (
           <Spinner />
         ) : !isCheck ? (
           <MdCheckBoxOutlineBlank />
         ) : (
           <MdCheckBox />
         )}
-        {updateError && (
-          <CenterErrorMessage>{UPDATE_ERROR_MESSAGE}</CenterErrorMessage>
+        {completeError && (
+          <CenterErrorMessage>{COMPLETE_ERROR_MESSAGE}</CenterErrorMessage>
         )}
-        <p>{content}</p>
-        <p>{createAt}</p>
       </TodoCheckBox>
+      <TodoItem isCheck={isCheck}>
+        <p>{content}</p>
+        <TodoCreateAt>{createAt}</TodoCreateAt>
+      </TodoItem>
       <TodoRemove onClick={() => onRemove(id)}>
         {deleteLoading ? <Spinner /> : <MdRemoveCircleOutline />}
         {deleteError && (
@@ -71,6 +73,7 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
 const TodoListItemWrapper = styled.div`
   padding: 1rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 
   &:nth-child(even) {
@@ -84,21 +87,12 @@ const TodoListItemWrapper = styled.div`
 
 const TodoCheckBox = styled.div<{ isCheck: boolean }>`
   cursor: pointer;
-  flex: 1;
   display: flex;
   align-items: center;
 
   svg {
     color: ${(props) => (props.isCheck ? `#22b8cf` : `none`)};
     font-size: 1.5rem;
-  }
-
-  p {
-    color: ${(props) => (props.isCheck ? `#adb5bd` : `none`)};
-    text-decoration: ${(props) => (props.isCheck ? `line-through` : `none`)};
-
-    margin-left: 0.5rem;
-    flex: 1;
   }
 `;
 
@@ -112,6 +106,25 @@ const TodoRemove = styled.div`
   &:hover {
     color: #ff8787;
   }
+`;
+
+const TodoItem = styled.div<{ isCheck: boolean }>`
+  display: flex;
+  padding: 0 20px;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+
+  p {
+    color: ${(props) => (props.isCheck ? `#adb5bd` : `none`)};
+    text-decoration: ${(props) => (props.isCheck ? `line-through` : `none`)};
+
+    margin-left: 0.5rem;
+  }
+`;
+
+const TodoCreateAt = styled.p`
+  min-width: 180px;
 `;
 
 export default TodoListItem;

@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { useDispatch } from "react-redux";
 import { MdAdd } from "react-icons/md";
-import { INPUT_ERROR_MESSAGE } from "utils/constants";
+import { DATE_FORM, INPUT_ERROR_MESSAGE } from "utils/constants";
 import { ErrorMessage } from "utils/styles/Message";
 import { createTodoRequest } from "store/actions/todo";
 import styled from "styled-components";
@@ -37,7 +37,7 @@ const TodoInsert: FC<TodoInsertProps> = () => {
         createTodoRequest({
           content: value,
           isCheck: false,
-          createAt: new Date(),
+          createAt: new Date().toLocaleDateString("kr-KR", DATE_FORM),
         })
       );
       setValue("");

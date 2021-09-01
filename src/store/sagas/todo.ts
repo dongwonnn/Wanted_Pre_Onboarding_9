@@ -8,19 +8,17 @@ import {
   DELETE_TODO_REQUEST,
   DELETE_TODO_SUCCESS,
   DELETE_TODO_FAILURE,
-  UPDATE_TODO_REQUEST,
-  UPDATE_TODO_SUCCESS,
-  UPDATE_TODO_FAILURE,
+  COMPLETE_TODO_REQUEST,
+  COMPLETE_TODO_SUCCESS,
+  COMPLETE_TODO_FAILURE,
   READ_TODO_REQUEST,
   READ_TODO_SUCCESS,
   READ_TODO_FAILURE,
   createTodoRequest,
   deleteTodoRequest,
-  readTodoRequest,
-  updateTodoRequest,
+  completeTodoRequest,
 } from "../actions/todo";
 
-// saga 생성
 function* createTodoSaga(action: ReturnType<typeof createTodoRequest>) {
   try {
     const { content, isCheck, createAt } = action;
@@ -61,28 +59,28 @@ function* deleteTodoSaga(action: ReturnType<typeof deleteTodoRequest>) {
   }
 }
 
-function* updateTodoSaga(action: ReturnType<typeof updateTodoRequest>) {
+function* completeTodoSaga(action: ReturnType<typeof completeTodoRequest>) {
   const { id, isCheck } = action;
 
   try {
-    yield call(authApi.updateCheckTodoData, {
+    yield call(authApi.completeCheckTodoData, {
       id,
       isCheck,
     });
 
     yield put({
-      type: UPDATE_TODO_SUCCESS,
+      type: COMPLETE_TODO_SUCCESS,
       payload: id,
     });
   } catch (e) {
     yield put({
-      type: UPDATE_TODO_FAILURE,
+      type: COMPLETE_TODO_FAILURE,
       payload: e,
     });
   }
 }
 
-function* readTodoSaga(action: ReturnType<typeof readTodoRequest>) {
+function* readTodoSaga() {
   try {
     const response: AxiosResponse = yield call(authApi.getTodosData);
     yield put({
@@ -100,6 +98,6 @@ function* readTodoSaga(action: ReturnType<typeof readTodoRequest>) {
 export function* todoSaga() {
   yield takeLatest(CREATE_TODO_REQUEST, createTodoSaga);
   yield takeLatest(DELETE_TODO_REQUEST, deleteTodoSaga);
-  yield takeLatest(UPDATE_TODO_REQUEST, updateTodoSaga);
+  yield takeLatest(COMPLETE_TODO_REQUEST, completeTodoSaga);
   yield takeLatest(READ_TODO_REQUEST, readTodoSaga);
 }

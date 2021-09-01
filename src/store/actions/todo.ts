@@ -8,9 +8,9 @@ export const DELETE_TODO_REQUEST = "DELETE_TODO_REQUEST" as const;
 export const DELETE_TODO_SUCCESS = "DELETE_TODO_SUCCESS" as const;
 export const DELETE_TODO_FAILURE = "DELETE_TODO_FAILURE" as const;
 
-export const UPDATE_TODO_REQUEST = "UPDATE_TODO_REQUEST" as const;
-export const UPDATE_TODO_SUCCESS = "UPDATE_TODO_SUCCESS" as const;
-export const UPDATE_TODO_FAILURE = "UPDATE_TODO_FAILURE" as const;
+export const COMPLETE_TODO_REQUEST = "COMPLETE_TODO_REQUEST" as const;
+export const COMPLETE_TODO_SUCCESS = "COMPLETE_TODO_SUCCESS" as const;
+export const COMPLETE_TODO_FAILURE = "COMPLETE_TODO_FAILURE" as const;
 
 export const READ_TODO_REQUEST = "READ_TODO_REQUEST" as const;
 export const READ_TODO_SUCCESS = "READ_TODO_SUCCESS" as const;
@@ -54,17 +54,17 @@ export const readTodoFailure = () => ({
   type: READ_TODO_FAILURE,
 });
 
-export const updateTodoRequest = ({ id, isCheck }: ITodo) => ({
-  type: UPDATE_TODO_REQUEST,
+export const completeTodoRequest = ({ id, isCheck }: ITodo) => ({
+  type: COMPLETE_TODO_REQUEST,
   id,
   isCheck,
 });
-export const updateTodoSuccess = (payload: number) => ({
-  type: UPDATE_TODO_SUCCESS,
+export const completeTodoSuccess = (payload: number) => ({
+  type: COMPLETE_TODO_SUCCESS,
   payload,
 });
-export const updateTodoFailure = () => ({
-  type: UPDATE_TODO_FAILURE,
+export const completeTodoFailure = () => ({
+  type: COMPLETE_TODO_FAILURE,
 });
 
 export type TodoAction =
@@ -77,6 +77,6 @@ export type TodoAction =
   | ReturnType<typeof readTodoRequest>
   | ReturnType<typeof readTodoSuccess>
   | ReturnType<typeof readTodoFailure>
-  | ReturnType<typeof updateTodoRequest>
-  | ReturnType<typeof updateTodoSuccess>
-  | ReturnType<typeof updateTodoFailure>;
+  | ReturnType<typeof completeTodoRequest>
+  | ReturnType<typeof completeTodoSuccess>
+  | ReturnType<typeof completeTodoFailure>;
