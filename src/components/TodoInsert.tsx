@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { createTodoRequest } from "store/actions/todo";
 import styled from "styled-components";
 import { INPUT_ERROR_MESSAGE } from "utils/constants/constants";
+import { ErrorMessage } from "utils/styles/Message";
 
 interface TodoInsertProps {}
 
@@ -93,12 +94,6 @@ const TodoInserWrapper = styled.form`
       background: #adb5bd;
     }
   }
-`;
-
-const ErrorMessage = styled.p`
-  color: red;
-  padding: 5px;
-  border-bottom: 1px solid #dee2e6;
 `;
 
 export default TodoInsert;
