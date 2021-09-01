@@ -30,7 +30,7 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
     [dispatch]
   );
 
-  const onToggle = useCallback(
+  const onToggleComplete = useCallback(
     (id) => {
       dispatch(
         updateTodoRequest({
@@ -44,7 +44,7 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
 
   return (
     <TodoListItemWrapper>
-      <TodoCheckBox isCheck={isCheck} onClick={() => onToggle(id)}>
+      <TodoCheckBox isCheck={isCheck} onClick={() => onToggleComplete(id)}>
         {updateLoading ? (
           <Spinner />
         ) : !isCheck ? (
@@ -100,8 +100,6 @@ const TodoCheckBox = styled.div<{ isCheck: boolean }>`
     margin-left: 0.5rem;
     flex: 1;
   }
-
-  // 체크 되었을 때 할 스타일
 `;
 
 const TodoRemove = styled.div`

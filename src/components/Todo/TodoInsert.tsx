@@ -1,4 +1,10 @@
-import React, { FC, useCallback, useState } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  FC,
+  useCallback,
+  useState,
+} from "react";
 import { useDispatch } from "react-redux";
 import { MdAdd } from "react-icons/md";
 import { INPUT_ERROR_MESSAGE } from "utils/constants";
@@ -13,13 +19,13 @@ const TodoInsert: FC<TodoInsertProps> = () => {
   const [inputError, setInputError] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
 
-  const onChange = useCallback((e) => {
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     setInputError(false);
   }, []);
 
   const onSubmit = useCallback(
-    (e) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (!value) {
         setInputError(true);
