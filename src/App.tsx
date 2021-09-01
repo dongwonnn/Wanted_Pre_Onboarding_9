@@ -1,7 +1,7 @@
 import React from "react";
-import TodoInsert from "components/TodoInsert";
-import TodoTemplate from "components/TodoTemplate";
-import TodoList from "components/TodoList";
+import TodoTemplate from "components/Todo/TodoTemplate";
+import TodoInsert from "components/Todo/TodoInsert";
+import TodoList from "components/Todo/TodoList";
 
 const App = () => {
   return (

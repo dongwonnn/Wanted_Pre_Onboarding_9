@@ -1,18 +1,17 @@
-import React, { useCallback } from "react";
-import { FC } from "react";
+import React, { useCallback, FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   MdCheckBoxOutlineBlank,
   MdCheckBox,
   MdRemoveCircleOutline,
 } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
 import { deleteTodoRequest, updateTodoRequest } from "store/actions/todo";
 import { RootState } from "store/reducers";
-import styled from "styled-components";
 import { UPDATE_ERROR_MESSAGE, REMOVE_ERROE_MESSAGE } from "utils/constants";
 import { CenterErrorMessage } from "utils/styles/Message";
 import { ITodo } from "utils/types/ITodo";
-import Spinner from "./Common/Spinner";
+import Spinner from "components/Common/Spinner";
+import styled from "styled-components";
 
 interface TodoListItemProps {
   todo: ITodo;

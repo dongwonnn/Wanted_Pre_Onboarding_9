@@ -27,7 +27,6 @@ export const initialState = {
   deleteError: false,
 };
 
-// 초기값 타입
 type TodoState = {
   todos: ITodo[];
   createLoading: boolean;

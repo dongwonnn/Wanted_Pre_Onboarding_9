@@ -1,19 +1,16 @@
-import React, { FC } from "react";
-import { useCallback } from "react";
-import { useState } from "react";
-import { MdAdd } from "react-icons/md";
+import React, { FC, useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { createTodoRequest } from "store/actions/todo";
-import styled from "styled-components";
+import { MdAdd } from "react-icons/md";
 import { INPUT_ERROR_MESSAGE } from "utils/constants";
 import { ErrorMessage } from "utils/styles/Message";
+import { createTodoRequest } from "store/actions/todo";
+import styled from "styled-components";
 
 interface TodoInsertProps {}
 
 const TodoInsert: FC<TodoInsertProps> = () => {
   const dispatch = useDispatch();
-
-  const [inputError, setInputError] = useState(false);
+  const [inputError, setInputError] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
 
   const onChange = useCallback((e) => {

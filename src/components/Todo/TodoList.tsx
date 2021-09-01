@@ -1,12 +1,11 @@
-import React, { FC } from "react";
-import TodoListItem from "./TodoListItem";
+import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { readTodoRequest } from "store/actions/todo";
-import { RootState } from "store/reducers";
-import Spinner from "./Common/Spinner";
 import { CenterErrorMessage } from "utils/styles/Message";
 import { READ_ERROR_MESSAGE, CREATE_ERROE_MESSAGE } from "utils/constants";
+import TodoListItem from "components/Todo/TodoListItem";
+import Spinner from "components/Common/Spinner";
+import { readTodoRequest } from "store/actions/todo";
+import { RootState } from "store/reducers";
 
 const TodoList: FC = () => {
   const dispatch = useDispatch();
