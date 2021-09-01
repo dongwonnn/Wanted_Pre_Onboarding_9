@@ -5,6 +5,7 @@ export const REMOVE_ERROE_MESSAGE = "삭제 중 오류가 발생했습니다.";
 export const CREATE_ERROE_MESSAGE = "생성 중 오류가 발생했습니다.";
 
 export const BASE_URL = "http://localhost:4000/";
+export const END_POINT = "todos";
 
 export const DATE_FORM: Intl.DateTimeFormatOptions = {
   year: "numeric",

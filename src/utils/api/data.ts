@@ -1,15 +1,17 @@
 import client from "./client";
 import { ITodo } from "utils/types/ITodo";
+import { END_POINT } from "utils/constants";
 
-export const getTodosData = () => client.get("/todos");
+export const getTodosData = () => client.get(`/${END_POINT}`);
 
 export const createTodoData = ({ content, isCheck, createAt }: ITodo) =>
-  client.post("/todos", { content, isCheck, createAt });
+  client.post(`/${END_POINT}`, { content, isCheck, createAt });
 
-export const deleteTodoData = (id: number) => client.delete(`/todos/${id}`);
+export const deleteTodoData = (id: number) =>
+  client.delete(`/${END_POINT}/${id}`);
 
 export const completeCheckTodoData = ({ id, isCheck }: ITodo) =>
-  client.patch(`/todos/${id}`, { isCheck });
+  client.patch(`/${END_POINT}/${id}`, { isCheck });
 
 export const updateTodoData = ({ id, content }: ITodo) =>
-  client.patch(`/todos/${id}`, { content });
+  client.patch(`/${END_POINT}/${id}`, { content });
