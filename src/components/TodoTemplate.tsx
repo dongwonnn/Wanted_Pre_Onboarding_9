@@ -29,7 +29,6 @@ const TodoTitle = styled.div`
 
 const TodoContent = styled.div`
   background: white;
-  height: 70vh;
 `;
 
 export default TodoTemplate;

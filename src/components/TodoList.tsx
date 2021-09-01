@@ -1,13 +1,25 @@
 import React from "react";
+import { FC } from "react";
 import TodoListItem from "./TodoListItem";
+import { ITodo } from "utils/types/ITodo";
 
-const TodoList = () => {
+interface TodoListProps {
+  todos: ITodo[];
+  onRemove: (e: number) => void;
+  onToggle: (e: number) => void;
+}
+
+const TodoList: FC<TodoListProps> = ({ todos, onRemove, onToggle }) => {
   return (
     <div>
-      <TodoListItem />
-      <TodoListItem />
-      <TodoListItem />
-      <TodoListItem />
+      {todos.map((todo) => (
+        <TodoListItem
+          key={todo.id}
+          todo={todo}
+          onRemove={onRemove}
+          onToggle={onToggle}
+        />
+      ))}
     </div>
   );
 };

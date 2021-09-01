@@ -1,11 +1,36 @@
-import React from "react";
+import React, { FC } from "react";
+import { useCallback } from "react";
+import { useState } from "react";
 import { MdAdd } from "react-icons/md";
 import styled from "styled-components";
 
-const TodoInsert = () => {
+interface TodoInsertProps {
+  onInsert: (e: string) => void;
+}
+
+const TodoInsert: FC<TodoInsertProps> = ({ onInsert }) => {
+  const [value, setValue] = useState<string>("");
+
+  const onChange = useCallback((e) => {
+    setValue(e.target.value);
+  }, []);
+
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      onInsert(value);
+      setValue("");
+    },
+    [onInsert, value]
+  );
+
   return (
-    <TodoInserWrapper>
-      <input placeholder="할 일을 입력하세요." />
+    <TodoInserWrapper onSubmit={onSubmit}>
+      <input
+        placeholder="할 일을 입력하세요."
+        value={value}
+        onChange={onChange}
+      />
       <button type="submit">
         <MdAdd />
       </button>
