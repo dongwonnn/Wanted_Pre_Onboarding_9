@@ -13,6 +13,9 @@ import {
   READ_TODO_SUCCESS,
   READ_TODO_FAILURE,
   TodoAction,
+  UPDATE_TODO_REQUEST,
+  UPDATE_TODO_SUCCESS,
+  UPDATE_TODO_FAILURE,
 } from "../actions/todo";
 
 export const initialState = {
@@ -125,6 +128,23 @@ const todo = (
         ...state,
         readLoading: false,
         readError: true,
+      };
+    case UPDATE_TODO_REQUEST:
+      return {
+        ...state,
+      };
+    case UPDATE_TODO_SUCCESS:
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload.id
+            ? { ...todo, content: action.payload.content }
+            : todo
+        ),
+      };
+    case UPDATE_TODO_FAILURE:
+      return {
+        ...state,
       };
     default:
       return state;

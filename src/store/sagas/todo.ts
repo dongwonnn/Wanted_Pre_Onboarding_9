@@ -17,6 +17,10 @@ import {
   createTodoRequest,
   deleteTodoRequest,
   completeTodoRequest,
+  UPDATE_TODO_REQUEST,
+  updateTodoRequest,
+  UPDATE_TODO_SUCCESS,
+  UPDATE_TODO_FAILURE,
 } from "../actions/todo";
 
 function* createTodoSaga(action: ReturnType<typeof createTodoRequest>) {
@@ -95,9 +99,31 @@ function* readTodoSaga() {
   }
 }
 
+function* updateTodoSaga(action: ReturnType<typeof updateTodoRequest>) {
+  try {
+    const { id, content } = action;
+
+    yield call(authApi.updateTodoData, {
+      id,
+      content,
+    });
+
+    yield put({
+      type: UPDATE_TODO_SUCCESS,
+      payload: { id, content },
+    });
+  } catch (e) {
+    yield put({
+      type: UPDATE_TODO_FAILURE,
+      payload: e,
+    });
+  }
+}
+
 export function* todoSaga() {
   yield takeLatest(CREATE_TODO_REQUEST, createTodoSaga);
   yield takeLatest(DELETE_TODO_REQUEST, deleteTodoSaga);
   yield takeLatest(COMPLETE_TODO_REQUEST, completeTodoSaga);
   yield takeLatest(READ_TODO_REQUEST, readTodoSaga);
+  yield takeLatest(UPDATE_TODO_REQUEST, updateTodoSaga);
 }

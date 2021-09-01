@@ -1,11 +1,17 @@
-import React, { useCallback, FC } from "react";
+import React, { useCallback, FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   MdCheckBoxOutlineBlank,
   MdCheckBox,
   MdRemoveCircleOutline,
+  MdEdit,
+  MdSave,
 } from "react-icons/md";
-import { deleteTodoRequest, completeTodoRequest } from "store/actions/todo";
+import {
+  deleteTodoRequest,
+  completeTodoRequest,
+  updateTodoRequest,
+} from "store/actions/todo";
 import { RootState } from "store/reducers";
 import { COMPLETE_ERROR_MESSAGE, REMOVE_ERROE_MESSAGE } from "utils/constants";
 import { CenterErrorMessage } from "utils/styles/Message";
@@ -18,7 +24,10 @@ interface TodoListItemProps {
 }
 
 const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
+  const [isEdit, setIsEdit] = useState(false);
   const { id, content, isCheck, createAt } = todo;
+  const [editValue, setEditValue] = useState(content);
+
   const dispatch = useDispatch();
   const { completeLoading, completeError, deleteLoading, deleteError } =
     useSelector((state: RootState) => state.todo);
@@ -42,6 +51,31 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
     [dispatch, isCheck]
   );
 
+  const onEdit = useCallback(() => {
+    setIsEdit((prev) => !prev);
+  }, []);
+
+  const onSave = useCallback(
+    (id) => {
+      setIsEdit((prev) => !prev);
+      dispatch(
+        updateTodoRequest({
+          id,
+          content: editValue,
+        })
+      );
+    },
+    [dispatch, editValue]
+  );
+
+  const onChange = useCallback((e) => {
+    setEditValue(e.target.value);
+  }, []);
+
+  if (isCheck === undefined) {
+    return null;
+  }
+
   return (
     <TodoListItemWrapper>
       <TodoCheckBox isCheck={isCheck} onClick={() => onToggleComplete(id)}>
@@ -56,8 +90,17 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
           <CenterErrorMessage>{COMPLETE_ERROR_MESSAGE}</CenterErrorMessage>
         )}
       </TodoCheckBox>
+      {!isEdit ? (
+        <TodoEdit onClick={() => onEdit()} />
+      ) : (
+        <TodoSave onClick={() => onSave(id)} />
+      )}
       <TodoItem isCheck={isCheck}>
-        <p>{content}</p>
+        {!isEdit ? (
+          <p>{content}</p>
+        ) : (
+          <input value={editValue} onChange={onChange} />
+        )}
         <TodoCreateAt>{createAt}</TodoCreateAt>
       </TodoItem>
       <TodoRemove onClick={() => onRemove(id)}>
@@ -121,6 +164,20 @@ const TodoItem = styled.div<{ isCheck: boolean }>`
 
     margin-left: 0.5rem;
   }
+
+  input {
+    width: 100%;
+  }
+`;
+
+const TodoEdit = styled(MdEdit)`
+  color: #22b8cf;
+  margin-left: 5px;
+`;
+
+const TodoSave = styled(MdSave)`
+  color: #22b8cf;
+  margin-left: 5px;
 `;
 
 const TodoCreateAt = styled.p`

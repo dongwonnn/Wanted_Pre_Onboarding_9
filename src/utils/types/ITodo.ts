@@ -1,6 +1,6 @@
 export interface ITodo {
   id?: number;
   content?: string;
-  isCheck: boolean;
+  isCheck?: boolean;
   createAt?: string;
 }
