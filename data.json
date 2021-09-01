@@ -2,7 +2,7 @@
   "todos": [
     {
       "content": "할 일2",
-      "isCheck": false,
+      "isCheck": true,
       "id": 2
     },
     {

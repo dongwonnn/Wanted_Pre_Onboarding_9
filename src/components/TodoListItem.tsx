@@ -6,16 +6,15 @@ import {
   MdRemoveCircleOutline,
 } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { deleteTodoRequest } from "store/reducers/todo";
+import { deleteTodoRequest, updateTodoRequest } from "store/reducers/todo";
 import styled from "styled-components";
 import { ITodo } from "utils/types/ITodo";
 
 interface TodoListItemProps {
   todo: ITodo;
-  onToggle: (e: number) => void;
 }
 
-const TodoListItem: FC<TodoListItemProps> = ({ todo, onToggle }) => {
+const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
   const dispatch = useDispatch();
   const { id, content, isCheck } = todo;
 
@@ -24,6 +23,18 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo, onToggle }) => {
       dispatch(deleteTodoRequest(id));
     },
     [dispatch]
+  );
+
+  const onToggle = useCallback(
+    (id) => {
+      dispatch(
+        updateTodoRequest({
+          id,
+          isCheck: !isCheck,
+        })
+      );
+    },
+    [dispatch, isCheck]
   );
 
   return (

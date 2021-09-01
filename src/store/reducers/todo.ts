@@ -17,7 +17,8 @@ export const READ_TODO_SUCCESS = "READ_TODO_SUCCESS" as const;
 export const READ_TODO_FAILURE = "READ_TODO_FAILURE" as const;
 
 interface createProps {
-  content: string;
+  id?: number;
+  content?: string;
   isCheck: boolean;
 }
 
@@ -57,11 +58,14 @@ export const readTodoFailure = () => ({
   type: READ_TODO_FAILURE,
 });
 
-export const updateTodoRequest = () => ({
+export const updateTodoRequest = ({ id, isCheck }: createProps) => ({
   type: UPDATE_TODO_REQUEST,
+  id,
+  isCheck,
 });
-export const updateTodoSuccess = () => ({
+export const updateTodoSuccess = (payload: number) => ({
   type: UPDATE_TODO_SUCCESS,
+  payload,
 });
 export const updateTodoFailure = () => ({
   type: UPDATE_TODO_FAILURE,
@@ -94,7 +98,6 @@ const todo = (
   state: TodoState = initialState,
   action: TodoAction
 ): TodoState => {
-  console.log(action);
   switch (action.type) {
     case CREATE_TODO_SUCCESS:
       return {
@@ -117,6 +120,11 @@ const todo = (
     case UPDATE_TODO_SUCCESS:
       return {
         ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload
+            ? { ...todo, isCheck: !todo.isCheck }
+            : todo
+        ),
       };
     case UPDATE_TODO_FAILURE:
       return {

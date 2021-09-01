@@ -6,11 +6,7 @@ import { useEffect } from "react";
 import { readTodoRequest } from "store/reducers/todo";
 import { RootState } from "store/reducers";
 
-interface TodoListProps {
-  onToggle: (e: number) => void;
-}
-
-const TodoList: FC<TodoListProps> = ({ onToggle }) => {
+const TodoList: FC = () => {
   const dispatch = useDispatch();
   const { todos } = useSelector((state: RootState) => state.todo);
 
@@ -21,7 +17,7 @@ const TodoList: FC<TodoListProps> = ({ onToggle }) => {
   return (
     <div>
       {todos.map((todo) => (
-        <TodoListItem key={todo.id} todo={todo} onToggle={onToggle} />
+        <TodoListItem key={todo.id} todo={todo} />
       ))}
     </div>
   );

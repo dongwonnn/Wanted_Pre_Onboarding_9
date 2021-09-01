@@ -45,6 +45,7 @@ function* createTodoSaga(action: ReturnType<typeof createTodoRequest>) {
 function* deleteTodoSaga(action: ReturnType<typeof deleteTodoRequest>) {
   try {
     const { id } = action;
+
     yield call(authApi.deleteTodoData, id);
 
     yield put({
@@ -59,12 +60,18 @@ function* deleteTodoSaga(action: ReturnType<typeof deleteTodoRequest>) {
   }
 }
 
-function* updateTodoSaga(action: ReturnType<typeof readTodoRequest>) {
+function* updateTodoSaga(action: ReturnType<typeof updateTodoRequest>) {
+  const { id, isCheck } = action;
+
   try {
-    const response: AxiosResponse = yield call(authApi.getTodosData);
+    yield call(authApi.updateCheckTodoData, {
+      id,
+      isCheck,
+    });
+
     yield put({
       type: UPDATE_TODO_SUCCESS,
-      payload: response.data,
+      payload: id,
     });
   } catch (e) {
     yield put({
@@ -74,7 +81,7 @@ function* updateTodoSaga(action: ReturnType<typeof readTodoRequest>) {
   }
 }
 
-function* readTodoSaga(action: ReturnType<typeof updateTodoRequest>) {
+function* readTodoSaga(action: ReturnType<typeof readTodoRequest>) {
   try {
     const response: AxiosResponse = yield call(authApi.getTodosData);
     yield put({
