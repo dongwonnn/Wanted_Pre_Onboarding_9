@@ -18,16 +18,17 @@ import {
   deleteTodoRequest,
   readTodoRequest,
   updateTodoRequest,
-} from "../reducers/todo";
+} from "../actions/todo";
 
 // saga 생성
 function* createTodoSaga(action: ReturnType<typeof createTodoRequest>) {
   try {
-    const { content, isCheck } = action;
+    const { content, isCheck, createAt } = action;
 
     const response: AxiosResponse = yield call(authApi.createTodoData, {
       content,
       isCheck,
+      createAt,
     });
 
     yield put({

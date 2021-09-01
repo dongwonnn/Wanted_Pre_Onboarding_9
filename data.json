@@ -1,19 +1,9 @@
 {
   "todos": [
     {
-      "content": "dasdas",
-      "isCheck": true,
-      "id": 2
-    },
-    {
-      "content": "dsadsa",
-      "isCheck": true,
-      "id": 3
-    },
-    {
-      "content": "dasdsa",
+      "content": "das",
       "isCheck": false,
-      "id": 4
+      "id": 1
     }
   ]
 }

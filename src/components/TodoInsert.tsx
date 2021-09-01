@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useState } from "react";
 import { MdAdd } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { createTodoRequest } from "store/reducers/todo";
+import { createTodoRequest } from "store/actions/todo";
 import styled from "styled-components";
 
 interface TodoInsertProps {}
@@ -23,6 +23,7 @@ const TodoInsert: FC<TodoInsertProps> = () => {
         createTodoRequest({
           content: value,
           isCheck: false,
+          createAt: new Date(),
         })
       );
       setValue("");

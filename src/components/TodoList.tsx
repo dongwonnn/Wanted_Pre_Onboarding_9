@@ -3,7 +3,7 @@ import { FC } from "react";
 import TodoListItem from "./TodoListItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { readTodoRequest } from "store/reducers/todo";
+import { readTodoRequest } from "store/actions/todo";
 import { RootState } from "store/reducers";
 
 const TodoList: FC = () => {

@@ -3,8 +3,8 @@ import { ITodo } from "utils/types/ITodo";
 
 export const getTodosData = () => client.get("/todos");
 
-export const createTodoData = ({ content, isCheck }: ITodo) =>
-  client.post("/todos", { content, isCheck });
+export const createTodoData = ({ content, isCheck, createAt }: ITodo) =>
+  client.post("/todos", { content, isCheck, createAt });
 
 export const deleteTodoData = (id: number) => client.delete(`/todos/${id}`);
 
