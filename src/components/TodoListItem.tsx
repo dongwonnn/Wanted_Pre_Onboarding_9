@@ -15,13 +15,13 @@ interface TodoListItemProps {
 }
 
 const TodoListItem: FC<TodoListItemProps> = ({ todo, onRemove, onToggle }) => {
-  const { id, text, checked } = todo;
+  const { id, content, isChecked } = todo;
 
   return (
     <TodoListItemWrapper>
-      <TodoCheckBox checked={checked} onClick={() => onToggle(id)}>
-        {!checked ? <MdCheckBoxOutlineBlank /> : <MdCheckBox />}
-        <p>{text}</p>
+      <TodoCheckBox isChecked={isChecked} onClick={() => onToggle(id)}>
+        {!isChecked ? <MdCheckBoxOutlineBlank /> : <MdCheckBox />}
+        <p>{content}</p>
       </TodoCheckBox>
       <TodoRemove onClick={() => onRemove(id)}>
         <MdRemoveCircleOutline />
@@ -44,20 +44,20 @@ const TodoListItemWrapper = styled.div`
   }
 `;
 
-const TodoCheckBox = styled.div<{ checked: boolean }>`
+const TodoCheckBox = styled.div<{ isChecked: boolean }>`
   cursor: pointer;
   flex: 1;
   display: flex;
   align-items: center;
 
   svg {
-    color: ${(props) => (props.checked ? `#22b8cf` : `none`)};
+    color: ${(props) => (props.isChecked ? `#22b8cf` : `none`)};
     font-size: 1.5rem;
   }
 
   p {
-    color: ${(props) => (props.checked ? `#adb5bd` : `none`)};
-    text-decoration: ${(props) => (props.checked ? `line-through` : `none`)};
+    color: ${(props) => (props.isChecked ? `#adb5bd` : `none`)};
+    text-decoration: ${(props) => (props.isChecked ? `line-through` : `none`)};
 
     margin-left: 0.5rem;
     flex: 1;

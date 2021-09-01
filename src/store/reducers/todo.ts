@@ -39,8 +39,9 @@ export const deleteTodoFailure = () => ({
 export const readTodoRequest = () => ({
   type: READ_TODO_REQUEST,
 });
-export const readTodoSuccess = () => ({
+export const readTodoSuccess = (payload: ITodo[]) => ({
   type: READ_TODO_SUCCESS,
+  payload,
 });
 export const readTodoFailure = () => ({
   type: READ_TODO_FAILURE,
@@ -71,16 +72,12 @@ type TodoAction =
   | ReturnType<typeof updateTodoFailure>;
 
 export const initialState = {
-  todo: {
-    id: -1,
-    text: "",
-    checked: false,
-  },
+  todos: [],
 };
 
 // 초기값 타입
 type TodoState = {
-  todo: ITodo;
+  todos: ITodo[];
 };
 
 const todo = (
@@ -115,6 +112,7 @@ const todo = (
     case READ_TODO_SUCCESS:
       return {
         ...state,
+        todos: action.payload,
       };
     case READ_TODO_FAILURE:
       return {
