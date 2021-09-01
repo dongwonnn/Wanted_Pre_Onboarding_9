@@ -10,3 +10,9 @@ export const CenterErrorMessage = styled.p`
   color: red;
   text-align: center;
 `;
+
+export const EmptyTodoMessage = styled.p`
+  color: black;
+  padding: 40px;
+  text-align: center;
+`;

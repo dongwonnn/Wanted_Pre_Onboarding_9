@@ -1,10 +1,4 @@
-import React, {
-  ChangeEvent,
-  FormEvent,
-  FC,
-  useCallback,
-  useState,
-} from "react";
+import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { MdAdd } from "react-icons/md";
 import { DATE_FORM, INPUT_ERROR_MESSAGE } from "utils/constants";
@@ -12,9 +6,7 @@ import { ErrorMessage } from "utils/styles/Message";
 import { createTodoRequest } from "store/actions/todo";
 import styled from "styled-components";
 
-interface TodoInsertProps {}
-
-const TodoInsert: FC<TodoInsertProps> = () => {
+const TodoInsert = () => {
   const dispatch = useDispatch();
   const [inputError, setInputError] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");

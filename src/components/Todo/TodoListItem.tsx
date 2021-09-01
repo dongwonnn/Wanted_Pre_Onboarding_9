@@ -1,4 +1,4 @@
-import React, { useCallback, FC, useState } from "react";
+import React, { useCallback, FC, useState, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   MdCheckBoxOutlineBlank,
@@ -53,6 +53,10 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
     [dispatch, isCheck]
   );
 
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setEditValue(e.target.value);
+  }, []);
+
   const onEdit = useCallback(() => {
     setIsEdit((prev) => !prev);
   }, []);
@@ -75,10 +79,6 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
     },
     [dispatch, editValue]
   );
-
-  const onChange = useCallback((e) => {
-    setEditValue(e.target.value);
-  }, []);
 
   if (isCheck === undefined) {
     return null;
