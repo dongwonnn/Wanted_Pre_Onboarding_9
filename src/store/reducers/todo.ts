@@ -16,11 +16,19 @@ export const READ_TODO_REQUEST = "READ_TODO_REQUEST" as const;
 export const READ_TODO_SUCCESS = "READ_TODO_SUCCESS" as const;
 export const READ_TODO_FAILURE = "READ_TODO_FAILURE" as const;
 
-export const createTodoRequest = () => ({
+interface createProps {
+  content: string;
+  isCheck: boolean;
+}
+
+export const createTodoRequest = ({ content, isCheck }: createProps) => ({
   type: CREATE_TODO_REQUEST,
+  content,
+  isCheck,
 });
-export const createTodoSuccess = () => ({
+export const createTodoSuccess = (payload: ITodo) => ({
   type: CREATE_TODO_SUCCESS,
+  payload,
 });
 export const createTodoFailure = () => ({
   type: CREATE_TODO_FAILURE,
@@ -84,10 +92,12 @@ const todo = (
   state: TodoState = initialState,
   action: TodoAction
 ): TodoState => {
+  console.log(action);
   switch (action.type) {
     case CREATE_TODO_SUCCESS:
       return {
         ...state,
+        todos: [...state.todos, { ...action.payload }],
       };
     case CREATE_TODO_FAILURE:
       return {

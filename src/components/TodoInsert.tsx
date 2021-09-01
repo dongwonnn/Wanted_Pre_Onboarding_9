@@ -2,6 +2,8 @@ import React, { FC } from "react";
 import { useCallback } from "react";
 import { useState } from "react";
 import { MdAdd } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { createTodoRequest } from "store/reducers/todo";
 import styled from "styled-components";
 
 interface TodoInsertProps {
@@ -9,6 +11,7 @@ interface TodoInsertProps {
 }
 
 const TodoInsert: FC<TodoInsertProps> = ({ onInsert }) => {
+  const dispatch = useDispatch();
   const [value, setValue] = useState<string>("");
 
   const onChange = useCallback((e) => {
@@ -18,10 +21,15 @@ const TodoInsert: FC<TodoInsertProps> = ({ onInsert }) => {
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      onInsert(value);
+      dispatch(
+        createTodoRequest({
+          content: value,
+          isCheck: false,
+        })
+      );
       setValue("");
     },
-    [onInsert, value]
+    [value, dispatch]
   );
 
   return (

@@ -23,7 +23,13 @@ import {
 // saga 생성
 function* createTodoSaga(action: ReturnType<typeof createTodoRequest>) {
   try {
-    const response: AxiosResponse = yield call(authApi.getTodosData);
+    const { content, isCheck } = action;
+
+    const response: AxiosResponse = yield call(authApi.createTodoData, {
+      content,
+      isCheck,
+    });
+
     yield put({
       type: CREATE_TODO_SUCCESS,
       payload: response.data,
