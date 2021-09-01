@@ -5,7 +5,7 @@ import { MdAdd } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { createTodoRequest } from "store/actions/todo";
 import styled from "styled-components";
-import { INPUT_ERROR_MESSAGE } from "utils/constants/constants";
+import { INPUT_ERROR_MESSAGE } from "utils/constants";
 import { ErrorMessage } from "utils/styles/Message";
 
 interface TodoInsertProps {}

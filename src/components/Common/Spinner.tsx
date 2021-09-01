@@ -4,8 +4,8 @@ import styled from "styled-components";
 const Spinner = () => (
   <Wrapper>
     <svg
-      width="64"
-      height="64"
+      width="22"
+      height="22"
       viewBox="0 0 38 38"
       xmlns="http://www.w3.org/2000/svg"
       stroke="grey"
@@ -31,7 +31,5 @@ const Spinner = () => (
 
 const Wrapper = styled.div`
   text-align: center;
-  margin-top: 32px;
-  margin-bottom: 32px;
 `;
 export default Spinner;

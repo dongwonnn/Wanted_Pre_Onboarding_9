@@ -5,18 +5,24 @@ import {
   MdCheckBox,
   MdRemoveCircleOutline,
 } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteTodoRequest, updateTodoRequest } from "store/actions/todo";
+import { RootState } from "store/reducers";
 import styled from "styled-components";
+import { UPDATE_ERROR_MESSAGE, REMOVE_ERROE_MESSAGE } from "utils/constants";
+import { CenterErrorMessage } from "utils/styles/Message";
 import { ITodo } from "utils/types/ITodo";
+import Spinner from "./Common/Spinner";
 
 interface TodoListItemProps {
   todo: ITodo;
 }
 
 const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
-  const dispatch = useDispatch();
   const { id, content, isCheck, createAt } = todo;
+  const dispatch = useDispatch();
+  const { updateLoading, updateError, deleteLoading, deleteError } =
+    useSelector((state: RootState) => state.todo);
 
   const onRemove = useCallback(
     (id) => {
@@ -40,12 +46,24 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
   return (
     <TodoListItemWrapper>
       <TodoCheckBox isCheck={isCheck} onClick={() => onToggle(id)}>
-        {!isCheck ? <MdCheckBoxOutlineBlank /> : <MdCheckBox />}
+        {updateLoading ? (
+          <Spinner />
+        ) : !isCheck ? (
+          <MdCheckBoxOutlineBlank />
+        ) : (
+          <MdCheckBox />
+        )}
+        {updateError && (
+          <CenterErrorMessage>{UPDATE_ERROR_MESSAGE}</CenterErrorMessage>
+        )}
         <p>{content}</p>
         <p>{createAt}</p>
       </TodoCheckBox>
       <TodoRemove onClick={() => onRemove(id)}>
-        <MdRemoveCircleOutline />
+        {deleteLoading ? <Spinner /> : <MdRemoveCircleOutline />}
+        {deleteError && (
+          <CenterErrorMessage>{REMOVE_ERROE_MESSAGE}</CenterErrorMessage>
+        )}
       </TodoRemove>
     </TodoListItemWrapper>
   );
