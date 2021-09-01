@@ -1,24 +1,6 @@
 {
   "todos": [
     {
-      "content": "dsadsa",
-      "isCheck": false,
-      "createAt": "2021-09-01T15:20:10.346Z",
-      "id": 6
-    },
-    {
-      "content": "dsad",
-      "isCheck": false,
-      "createAt": "2021-09-01T15:20:23.786Z",
-      "id": 7
-    },
-    {
-      "content": "das",
-      "isCheck": false,
-      "createAt": "2021-09-01T15:27:48.994Z",
-      "id": 8
-    },
-    {
       "content": "dsa",
       "isCheck": false,
       "createAt": "2021-09-01T15:27:50.043Z",
