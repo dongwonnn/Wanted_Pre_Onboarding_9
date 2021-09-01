@@ -1,21 +1,30 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { FC } from "react";
 import {
   MdCheckBoxOutlineBlank,
   MdCheckBox,
   MdRemoveCircleOutline,
 } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { deleteTodoRequest } from "store/reducers/todo";
 import styled from "styled-components";
 import { ITodo } from "utils/types/ITodo";
 
 interface TodoListItemProps {
   todo: ITodo;
-  onRemove: (e: number) => void;
   onToggle: (e: number) => void;
 }
 
-const TodoListItem: FC<TodoListItemProps> = ({ todo, onRemove, onToggle }) => {
+const TodoListItem: FC<TodoListItemProps> = ({ todo, onToggle }) => {
+  const dispatch = useDispatch();
   const { id, content, isCheck } = todo;
+
+  const onRemove = useCallback(
+    (id) => {
+      dispatch(deleteTodoRequest(id));
+    },
+    [dispatch]
+  );
 
   return (
     <TodoListItemWrapper>

@@ -44,10 +44,12 @@ function* createTodoSaga(action: ReturnType<typeof createTodoRequest>) {
 
 function* deleteTodoSaga(action: ReturnType<typeof deleteTodoRequest>) {
   try {
-    const response: AxiosResponse = yield call(authApi.getTodosData);
+    const { id } = action;
+    yield call(authApi.deleteTodoData, id);
+
     yield put({
       type: DELETE_TODO_SUCCESS,
-      payload: response.data,
+      payload: id,
     });
   } catch (e) {
     yield put({

@@ -7,11 +7,10 @@ import { readTodoRequest } from "store/reducers/todo";
 import { RootState } from "store/reducers";
 
 interface TodoListProps {
-  onRemove: (e: number) => void;
   onToggle: (e: number) => void;
 }
 
-const TodoList: FC<TodoListProps> = ({ onRemove, onToggle }) => {
+const TodoList: FC<TodoListProps> = ({ onToggle }) => {
   const dispatch = useDispatch();
   const { todos } = useSelector((state: RootState) => state.todo);
 
@@ -22,12 +21,7 @@ const TodoList: FC<TodoListProps> = ({ onRemove, onToggle }) => {
   return (
     <div>
       {todos.map((todo) => (
-        <TodoListItem
-          key={todo.id}
-          todo={todo}
-          onRemove={onRemove}
-          onToggle={onToggle}
-        />
+        <TodoListItem key={todo.id} todo={todo} onToggle={onToggle} />
       ))}
     </div>
   );

@@ -34,11 +34,13 @@ export const createTodoFailure = () => ({
   type: CREATE_TODO_FAILURE,
 });
 
-export const deleteTodoRequest = () => ({
+export const deleteTodoRequest = (id: number) => ({
   type: DELETE_TODO_REQUEST,
+  id,
 });
-export const deleteTodoSuccess = () => ({
+export const deleteTodoSuccess = (payload: number) => ({
   type: DELETE_TODO_SUCCESS,
+  payload,
 });
 export const deleteTodoFailure = () => ({
   type: DELETE_TODO_FAILURE,
@@ -106,6 +108,7 @@ const todo = (
     case DELETE_TODO_SUCCESS:
       return {
         ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
     case DELETE_TODO_FAILURE:
       return {

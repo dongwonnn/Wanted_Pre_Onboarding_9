@@ -24,29 +24,6 @@ const App = () => {
     },
   ]);
 
-  const nextId = useRef<number>(4);
-
-  const onInsert = useCallback(
-    (text) => {
-      const todo = {
-        id: nextId.current,
-        text,
-        checked: false,
-      };
-      setTodos(todos.concat(todo));
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      nextId.current + 1;
-    },
-    [todos]
-  );
-
-  const onRemove = useCallback(
-    (id) => {
-      setTodos(todos.filter((todo) => todo.id !== id));
-    },
-    [todos]
-  );
-
   const onToggle = useCallback(
     (id) => {
       setTodos(
@@ -60,8 +37,8 @@ const App = () => {
 
   return (
     <TodoTemplate>
-      <TodoInsert onInsert={onInsert} />
-      <TodoList onRemove={onRemove} onToggle={onToggle} />
+      <TodoInsert />
+      <TodoList onToggle={onToggle} />
     </TodoTemplate>
   );
 };

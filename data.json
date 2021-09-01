@@ -1,32 +1,9 @@
 {
   "todos": [
     {
-      "content": "할 일1",
-      "isCheck": false,
-      "id": 1
-    },
-    {
       "content": "할 일2",
       "isCheck": false,
       "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "id": 7
-    },
-    {
-      "id": 8
     },
     {
       "content": "dsadsa",
@@ -42,6 +19,11 @@
       "content": "ㅇㄴㅁㅇㄴ",
       "isCheck": false,
       "id": 11
+    },
+    {
+      "content": "ㅇㄴㅁㅇㄴㅁㅇㄴㅁ",
+      "isCheck": false,
+      "id": 12
     }
   ]
 }

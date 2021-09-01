@@ -6,11 +6,9 @@ import { useDispatch } from "react-redux";
 import { createTodoRequest } from "store/reducers/todo";
 import styled from "styled-components";
 
-interface TodoInsertProps {
-  onInsert: (e: string) => void;
-}
+interface TodoInsertProps {}
 
-const TodoInsert: FC<TodoInsertProps> = ({ onInsert }) => {
+const TodoInsert: FC<TodoInsertProps> = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState<string>("");
 
