@@ -5,20 +5,30 @@ import { MdAdd } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { createTodoRequest } from "store/actions/todo";
 import styled from "styled-components";
+import { INPUT_ERROR_MESSAGE } from "utils/constants/constants";
 
 interface TodoInsertProps {}
 
 const TodoInsert: FC<TodoInsertProps> = () => {
   const dispatch = useDispatch();
+
+  const [inputError, setInputError] = useState(false);
   const [value, setValue] = useState<string>("");
 
   const onChange = useCallback((e) => {
     setValue(e.target.value);
+    setInputError(false);
   }, []);
 
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
+      if (!value) {
+        setInputError(true);
+
+        return;
+      }
+
       dispatch(
         createTodoRequest({
           content: value,
@@ -32,16 +42,19 @@ const TodoInsert: FC<TodoInsertProps> = () => {
   );
 
   return (
-    <TodoInserWrapper onSubmit={onSubmit}>
-      <input
-        placeholder="할 일을 입력하세요."
-        value={value}
-        onChange={onChange}
-      />
-      <button type="submit">
-        <MdAdd />
-      </button>
-    </TodoInserWrapper>
+    <>
+      <TodoInserWrapper onSubmit={onSubmit}>
+        <input
+          placeholder="할 일을 입력하세요."
+          value={value}
+          onChange={onChange}
+        />
+        <button type="submit">
+          <MdAdd />
+        </button>
+      </TodoInserWrapper>
+      {inputError && <ErrorMessage>{INPUT_ERROR_MESSAGE}</ErrorMessage>}
+    </>
   );
 };
 
@@ -80,6 +93,12 @@ const TodoInserWrapper = styled.form`
       background: #adb5bd;
     }
   }
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  padding: 5px;
+  border-bottom: 1px solid #dee2e6;
 `;
 
 export default TodoInsert;
