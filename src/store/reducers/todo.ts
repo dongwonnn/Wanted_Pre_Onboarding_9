@@ -16,13 +16,7 @@ export const READ_TODO_REQUEST = "READ_TODO_REQUEST" as const;
 export const READ_TODO_SUCCESS = "READ_TODO_SUCCESS" as const;
 export const READ_TODO_FAILURE = "READ_TODO_FAILURE" as const;
 
-interface createProps {
-  id?: number;
-  content?: string;
-  isCheck: boolean;
-}
-
-export const createTodoRequest = ({ content, isCheck }: createProps) => ({
+export const createTodoRequest = ({ content, isCheck }: ITodo) => ({
   type: CREATE_TODO_REQUEST,
   content,
   isCheck,
@@ -58,7 +52,7 @@ export const readTodoFailure = () => ({
   type: READ_TODO_FAILURE,
 });
 
-export const updateTodoRequest = ({ id, isCheck }: createProps) => ({
+export const updateTodoRequest = ({ id, isCheck }: ITodo) => ({
   type: UPDATE_TODO_REQUEST,
   id,
   isCheck,

@@ -1,5 +1,5 @@
 export interface ITodo {
-  id: number;
-  content: string;
+  id?: number;
+  content?: string;
   isCheck: boolean;
 }
