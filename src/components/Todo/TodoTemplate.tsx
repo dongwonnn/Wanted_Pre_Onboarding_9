@@ -11,13 +11,14 @@ const TodoTemplate: FC = ({ children }) => {
 };
 
 const TodoTemplateWrapper = styled.div`
-  width: 1024px;
+  min-width: 512px;
+  max-width: 1024px;
   margin: 0 auto;
   margin-top: 3rem;
   border-radius: 4px;
 `;
 
-const TodoTitle = styled.div`
+const TodoTitle = styled.header`
   background-color: #22b8cf;
   color: white;
   padding: 1.5rem 0;
@@ -27,7 +28,7 @@ const TodoTitle = styled.div`
   justify-content: center;
 `;
 
-const TodoContent = styled.div`
+const TodoContent = styled.main`
   background: white;
 `;
 

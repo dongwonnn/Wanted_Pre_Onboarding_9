@@ -26,6 +26,8 @@ interface TodoListItemProps {
 const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
   const [isEdit, setIsEdit] = useState(false);
   const { id, content, isCheck, createAt } = todo;
+
+  const [editError, setEditError] = useState(false);
   const [editValue, setEditValue] = useState(content);
 
   const dispatch = useDispatch();
@@ -57,6 +59,12 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
 
   const onSave = useCallback(
     (id) => {
+      if (!editValue) {
+        setEditError(true);
+
+        return;
+      }
+
       setIsEdit((prev) => !prev);
       dispatch(
         updateTodoRequest({
@@ -99,7 +107,11 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
         {!isEdit ? (
           <p>{content}</p>
         ) : (
-          <input value={editValue} onChange={onChange} />
+          <input
+            placeholder={editError ? "수정값을 입력해주세요." : ""}
+            value={editValue}
+            onChange={onChange}
+          />
         )}
         <TodoCreateAt>{createAt}</TodoCreateAt>
       </TodoItem>
@@ -113,7 +125,7 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
   );
 };
 
-const TodoListItemWrapper = styled.div`
+const TodoListItemWrapper = styled.li`
   padding: 1rem;
   display: flex;
   justify-content: space-between;

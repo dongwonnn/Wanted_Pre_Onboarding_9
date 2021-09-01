@@ -17,7 +17,7 @@ const TodoList: FC = () => {
   }, [dispatch, todos.length]);
 
   return (
-    <div>
+    <ul>
       {todos.map((todo) => (
         <TodoListItem key={todo.id} todo={todo} />
       ))}
@@ -29,7 +29,7 @@ const TodoList: FC = () => {
       {createError && (
         <CenterErrorMessage>{CREATE_ERROE_MESSAGE}</CenterErrorMessage>
       )}
-    </div>
+    </ul>
   );
 };
 
