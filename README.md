@@ -66,10 +66,30 @@ HTTP 요청 리스트
 ## 폴더 구조
 
 ```html
-📦src ┣ 📂components ┃ ┣ 📂Common ┃ ┃ ┗ 📜Spinner.tsx ┃ ┗ 📂Todo ┃ ┣
-📜TodoInsert.tsx ┃ ┣ 📜TodoList.tsx ┃ ┣ 📜TodoListItem.tsx ┃ ┗
-📜TodoTemplate.tsx ┣ 📂store ┃ ┣ 📂actions ┃ ┃ ┗ 📜todo.ts ┃ ┣ 📂reducers ┃ ┃ ┣
-📜todo.ts ┃ ┃ ┗ 📜index.ts ┃ ┣ 📂sagas ┃ ┣ ┣ 📜todo.ts ┃ ┣ ┗ 📜index.ts ┃ ┗
-📜index.ts ┣ 📂utils ┃ ┣ 📂api ┃ ┣ 📂constants ┃ ┣ 📂stlyes ┃ ┗ 📂types ┣
-📜App.tsx ┗ 📜index.tsx
+📦src
+ ┣ 📂components
+ ┃  ┣ 📂Common
+ ┃  ┃  ┗ 📜Spinner.tsx
+ ┃  ┗ 📂Todo
+ ┃     ┣ 📜TodoInsert.tsx
+ ┃     ┣ 📜TodoList.tsx
+ ┃     ┣ 📜TodoListItem.tsx
+ ┃     ┗ 📜TodoTemplate.tsx
+ ┣ 📂store
+ ┃  ┣  📂actions
+ ┃  ┃   ┗ 📜todo.ts
+ ┃  ┣  📂reducers
+ ┃  ┃   ┣ 📜todo.ts
+ ┃  ┃   ┗ 📜index.ts
+ ┃  ┣  📂sagas
+ ┃  ┣   ┣ 📜todo.ts
+ ┃  ┣   ┗ 📜index.ts
+ ┃  ┗ 📜index.ts
+ ┣ 📂utils
+ ┃  ┣  📂api
+ ┃  ┣  📂constants
+ ┃  ┣  📂stlyes
+ ┃  ┗  📂types
+ ┣ 📜App.tsx
+ ┗ 📜index.tsx
 ```
