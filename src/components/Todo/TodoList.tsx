@@ -14,7 +14,7 @@ const TodoList: FC = () => {
 
   useEffect(() => {
     dispatch(readTodoRequest());
-  }, [dispatch, todos.length]);
+  }, [dispatch]);
 
   return (
     <ul>

@@ -34,6 +34,7 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
   const { completeLoading, completeError, deleteLoading, deleteError } =
     useSelector((state: RootState) => state.todo);
 
+  // todo 삭제하는 함수입니다. dispatch로 id를 전달해 filter 메소드로 거릅니다.
   const onRemove = useCallback(
     (id) => {
       dispatch(deleteTodoRequest(id));
@@ -41,6 +42,8 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
     [dispatch]
   );
 
+  // todo 완료 상태 체크하는 함수입니다.
+  // dispatch로 id와 isCheck를 전달해 map 메소드로 새 배열을 반환합니다.
   const onToggleComplete = useCallback(
     (id) => {
       dispatch(
@@ -61,6 +64,7 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
     setIsEdit((prev) => !prev);
   }, []);
 
+  // todo 수정된 conent를 저장합니다. dispatch로 id와 content로 넘겨줘 수정합니다.
   const onSave = useCallback(
     (id) => {
       if (!editValue) {

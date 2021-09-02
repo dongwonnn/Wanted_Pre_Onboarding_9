@@ -11,11 +11,15 @@ const TodoInsert = () => {
   const [inputError, setInputError] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
 
+  // input값 저장하는 함수입니다.
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     setInputError(false);
   }, []);
 
+  // Todo 생성하는 버튼입니다.
+  // 입력값 빈칸일 때 예외 경고 메세지를 출력합니다.
+  // dispatch를 이용해 todo를 생성합니다. ( id는 자동 생성 )
   const onSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
