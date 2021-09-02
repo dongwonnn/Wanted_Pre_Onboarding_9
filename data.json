@@ -1,22 +1,16 @@
 {
   "todos": [
     {
-      "content": "ㅇㄴㅁㅇㄴㅁ",
+      "content": "das",
       "isCheck": false,
       "createAt": "2021년 9월 2일 목요일",
-      "id": 25
+      "id": 28
     },
     {
-      "content": "dsa",
+      "content": "casc",
       "isCheck": false,
       "createAt": "2021년 9월 2일 목요일",
-      "id": 26
-    },
-    {
-      "content": "dsa",
-      "isCheck": false,
-      "createAt": "2021년 9월 2일 목요일",
-      "id": 27
+      "id": 29
     }
   ]
 }
